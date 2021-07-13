@@ -14,45 +14,60 @@
 </style>
 
 <script>
-    $(function(){
-    
-        $("#btn").on( "click", function(){
-    
-            formData = new Object();
-    
-            formData["name"] = $("#fld").val();
-    
-            $.ajax({
-                url: "form-action-json.php",
-                type: "GET",
-                data: formData,
-                cache: false
-            })
-            .done(function( data, textStatus ){
-                console.log( "status:" + textStatus );
-                console.log( "data:" + JSON.stringify(data, null, "	") );
-    
-                $("#message").text( data.name );
-    
-                $("<span>")
-                    .css( "color", "red" )
-                    .text( data.name )
-                    .appendTo( $("#content") )
-                ;
-    
-            })
-            .fail(function(jqXHR, textStatus, errorThrown ){
-                console.log( "status:" + textStatus );
-                console.log( "errorThrown:" + errorThrown );
-            })
-            .always(function() {
-    
-            })
+$(function(){
+
+    $("#btn").on( "click", function(){
+
+        formData = new Object();
+
+        formData["name"] = $("#fld").val();
+
+        $.ajax({
+            url: "form-action-json.php",
+            type: "GET",
+            data: formData,
+            cache: false
+        })
+        .done(function( data, textStatus ){
+            console.log( "status:" + textStatus );
+            console.log( "data:" + JSON.stringify(data, null, "	") );
+
+            $("#message").text( data.name );
+
+            $("<span>")
+                .css( "color", "red" )
+                .text( data.name )
+                .appendTo( $("#content") )
             ;
-    
-        });
-    
+
+        })
+        .fail(function(jqXHR, textStatus, errorThrown ){
+            console.log( "status:" + textStatus );
+            console.log( "errorThrown:" + errorThrown );
+        })
+        .always(function() {
+
+        })
+        ;
+
     });
+
+    var path = location.pathname;
+    path = path.split("/");
+    path = path[path.length-3]+"/"+path[path.length-2];
+    path = _helper.get_title_path();
+    $("h3").text( path );
+    document.title = path;
+});
+
+window._helper = {
+    get_title_path : function(){
+        var path = location.pathname;
+        path = path.split("/");
+        path = path[path.length-3]+"/"+path[path.length-2];
+        return path;
+    }
+}
 </script>
 
 </head>
