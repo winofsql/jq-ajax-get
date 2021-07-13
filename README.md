@@ -1,4 +1,5 @@
 # jQuery による ajax( GET ) の基本サンプル
+https://docs.github.com/ja/github/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks
 # #PG-01 : JS
 ```javascript
 formData = new Object();
