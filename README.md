@@ -7,4 +7,4 @@ formData["name"] = $("#fld").val();
 
 $("#message").text( data.name );
     
-# #03 PHP
+# #02 PHP
