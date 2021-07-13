@@ -1,5 +1,5 @@
 # jQuery による ajax( GET ) の基本サンプル
-# 01
+# #01
 
 formData = new Object();
     
