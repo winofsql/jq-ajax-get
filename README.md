@@ -4,9 +4,15 @@
 formData = new Object();
 formData["name"] = $("#fld").val();
 ```
-
+```javascript
 $("#message").text( data.name );
-    
+
+$("<span>")
+    .css( "color", "red" )
+    .text( data.name )
+    .appendTo( $("#content") )
+;
+```   
 # #PG-01 : PHP : 要 isset チェック
 
 $json = new stdClass;
