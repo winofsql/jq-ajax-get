@@ -7,7 +7,7 @@ formData["name"] = $("#fld").val();
 
 $("#message").text( data.name );
     
-# #02 PHP
+# #02 PHP : 要 isset チェック
 
 $json = new stdClass;
 
