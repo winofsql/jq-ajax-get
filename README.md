@@ -8,7 +8,11 @@ formData["name"] = $("#fld").val();
 $("#message").text( data.name );
     
 $("<span>")
+
     .css( "color", "red" )
+
     .text( data.name )
+
     .appendTo( $("#content") )
+
 ;
