@@ -52,10 +52,7 @@ $(function(){
 
     });
 
-    var path = location.pathname;
-    path = path.split("/");
-    path = path[path.length-3]+"/"+path[path.length-2];
-    path = _helper.get_title_path();
+    var path = _helper.get_title_path();
     $("h3").text( path );
     document.title = path;
 });
