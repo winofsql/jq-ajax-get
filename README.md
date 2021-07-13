@@ -14,7 +14,11 @@ $("<span>")
 ;
 ```   
 # #PG-01 : PHP : 要 isset チェック
-
+```php
 $json = new stdClass;
-
+// 未定義データには空文字をセット
+if ( !isset( $_GET["name"] ) ) {
+    $_GET["name"] = "";
+}
 $json->name = $_GET["name"];
+```
