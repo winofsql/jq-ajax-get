@@ -31,6 +31,8 @@ $(function(){
             console.log( "status:" + textStatus );
             console.log( "data:" + JSON.stringify(data, null, "	") );
 
+            $("#content").html("");
+            
             if ( data.code == 200 ) {
 
                 $("<div></div>")
