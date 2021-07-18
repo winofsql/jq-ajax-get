@@ -13,6 +13,9 @@ $user = "root";
 $password = "";
 $dbname = "lightbox";
 $connect_string = "mysql:host={$host};dbname={$dbname}";
+if ( file_exists( $_SERVER['DOCUMENT_ROOT'] . "/app/connect.php" ) ){
+	require_once( $_SERVER['DOCUMENT_ROOT'] . "/app/connect.php" );
+}
 
 // ***********************************
 // 接続
