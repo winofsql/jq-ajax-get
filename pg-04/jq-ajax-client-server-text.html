@@ -37,23 +37,23 @@ $(function(){
 
                 $("<div></div>")
                     .text( data.data.pref )
-                    .appendTo( content )
+                    .appendTo( $("#content") )
                 ;
                 $("<div></div>")
                     .text( data.data.address )
-                    .appendTo( content )
+                    .appendTo( $("#content") )
                 ;
                 $("<div></div>")
                     .text( data.data.city )
-                    .appendTo( content )
+                    .appendTo( $("#content") )
                 ;
                 $("<div></div>")
                     .text( data.data.town )
-                    .appendTo( content )
+                    .appendTo( $("#content") )
                 ;
                 $("<div></div>")
                     .text( data.data.fullAddress )
-                    .appendTo( content )
+                    .appendTo( $("#content") )
                 ;
                 
             }
@@ -61,7 +61,7 @@ $(function(){
 
                 $("<div></div>")
                     .text( "該当する郵便番号は存在しません" )
-                    .appendTo( content )
+                    .appendTo( $("#content") )
                 ;
 
             }
