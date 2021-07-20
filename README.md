@@ -24,7 +24,7 @@ if ( !isset( $_GET["name"] ) ) {
 $json->name = $_GET["name"];
 ```
 
-# Modal components( Bootstrap )
+# #Modal components( Bootstrap : 05 用 )
 https://getbootstrap.com/docs/5.0/components/modal/
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
