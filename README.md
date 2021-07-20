@@ -23,3 +23,6 @@ if ( !isset( $_GET["name"] ) ) {
 }
 $json->name = $_GET["name"];
 ```
+
+
+https://getbootstrap.com/docs/5.0/components/modal/
