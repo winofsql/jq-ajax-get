@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
+
+<style>
+#base {
+	padding: 20px;
+}
+
+.table-responsive {
+	margin-top: 20px;
+}
+</style>
+
+<script>
+var myModal;
+$(function(){
+
+	myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+	  keyboard: false
+	})
+
+	$("#update").on( "click", function(){
+
+		formData = {};
+		formData["scode"] = $("#fld1").val();
+		formData["name"] = $("#fld2").val();
+		formData["furi"] = $("#fld3").val();
+
+		$.ajax({
+			url: "http://localhost/app/form-action/form-ajax/jq-ajax-get/pg-05-mysql-list/form-action-json-mysql-update.php",
+			type: "GET",
+			data: formData,
+			cache: false
+		})
+		.done(function( data, textStatus ){
+			console.log( "status:" + textStatus );
+			console.log( "data:" + JSON.stringify(data, null, "	") );
+
+			if ( data.status == "ok" ) {
+				myModal.hide();
+			}
+
+		})
+		.fail(function(jqXHR, textStatus, errorThrown ){
+			console.log( "status:" + textStatus );
+			console.log( "errorThrown:" + errorThrown );
+		})
+		.always(function() {
+
+		})
+		;
+	});
+
+	$("#btn").on( "click", function(){
+
+		$.ajax({
+			url: "http://localhost/app/form-action/form-ajax/jq-ajax-get/pg-05-mysql-list/form-action-json-mysql-list.php",
+			type: "GET",
+			// data: formData,
+			cache: false
+		})
+		.done(function( data, textStatus ){
+			console.log( "status:" + textStatus );
+			//console.log( "data:" + JSON.stringify(data, null, "	") );
+
+			$("#tbl").html("");
+			
+			var row;
+			for( i = 0; i < data.row.length; i++ ) {
+
+				row = $("<tr></tr>");
+				$(row).on( "dblclick", function(){
+					$( this ).children().each(function( index ){
+
+						$("#fld" + ( index+1 )  ).val( $(this).text() );
+
+						/*if ( index == 0 ) {
+							$("#fld1").val( $(this).text() );
+						}
+						if ( index == 1 ) {
+							$("#fld2").val( $(this).text() );
+						}
+						if ( index == 2 ) {
+							$("#fld3").val( $(this).text() );
+						}*/
+
+					});
+
+					myModal.show();
+
+				});
+
+				// 一つ一つソースに書く場合( メンテナンス性が高い )
+				$("<td></td>")
+					.text(data.row[i]["社員コード"])
+					.appendTo(row)
+				;
+				$("<td></td>")
+					.text(data.row[i]["氏名"])
+					.appendTo(row)
+				;
+				$("<td></td>")
+					.text(data.row[i]["フリガナ"])
+					.appendTo(row)
+				;
+
+				row.appendTo( $("#tbl") );
+
+			}
+
+		})
+		.fail(function(jqXHR, textStatus, errorThrown ){
+			console.log( "status:" + textStatus );
+			console.log( "errorThrown:" + errorThrown );
+		})
+		.always(function() {
+
+		})
+		;
+
+	});
+
+	var path = _helper.get_title_path();
+	$("h3").text( path );
+	document.title = path;
+});
+
+window._helper = {
+	get_title_path : function(){
+		var path = location.pathname;
+		path = path.split("/");
+		path = path[path.length-3]+"/"+path[path.length-2];
+		return path;
+	}
+}
+</script>
+
+
+<h3 class="alert alert-primary"></h3>
+<div id="base">
+
+<!-- Button trigger modal -->
+<button style="display:none;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">社員データ変更</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	  </div>
+	  <div class="modal-body">
+		<div><input id="fld1" name="fld1" type="text" value="" readonly></div>
+		<div><input id="fld2" name="fld2" type="text" value=""></div>
+		<div><input id="fld3" name="fld3" type="text" value=""></div>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		<button id="update" type="button" class="btn btn-primary">更新</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+	<input id="btn" name="btn" type="button" value="実行">
+
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>社員コード</th>
+					<th>氏名</th>
+					<th>フリガナ</th>
+					<th>所属</th>
+					<th>性別</th>
+					<th>給与</th>
+					<th>手当</th>
+					<th>管理者</th>
+					<th>生年月日</th>
+				</tr>
+			</thead>
+			<tbody id="tbl">
+			</tbody>
+		</table>
+	</div>
+
+</div>
+</body>
+</html>
